@@ -33,6 +33,11 @@ export async function sendText(opts: {
   });
 }
 
+// For messages to Righto Booked itself, not to a tradie's customers.
+export async function sendAdminText(body: string): Promise<void> {
+  await twilioClient().messages.create({ to: env.adminMobile(), from: env.adminFromNumber(), body });
+}
+
 export class MarketingBlocked extends Error {}
 
 // Sends a template to a customer, refusing marketing texts without consent (Spam Act).
